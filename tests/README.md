@@ -9,9 +9,10 @@ tests/
 ├── fixtures/        # Test data and mocks
 │   ├── users.json   # Sample user data
 │   └── mocks/       # Mock implementations
-├── unit/            # Unit tests (optional subdirectory)
-├── integration/     # Integration tests (optional subdirectory)
-└── e2e/             # End-to-end tests (optional subdirectory)
+├── unit/            # Unit tests
+├── integration/     # Integration tests
+├── scenarios/       # Scenario / critical-path verification
+└── e2e/             # End-to-end tests (optional if separate from scenarios)
 ```
 
 ## Conventions
@@ -55,10 +56,21 @@ describe('UserService', () => {
 - Use real dependencies where practical
 - May use test database
 
+#### Scenario Tests
+- Test real user or operator workflows end to end
+- Focus on failure signals, not just happy-path assertions
+- Use these to catch cases where code passes unit tests but fails real usage
+
 #### End-to-End Tests
 - Test complete user flows
 - Run against full application
 - Slower but comprehensive
+
+## Recommended default order
+
+1. Scenario/E2E tests for user-visible outcomes
+2. Integration tests for boundaries and contracts
+3. Unit tests for isolated logic and edge cases
 
 ## Running Tests
 
@@ -90,5 +102,6 @@ When writing tests:
 - [ ] Happy path covered
 - [ ] Error cases covered
 - [ ] Edge cases covered
+- [ ] Critical-path scenario covered where appropriate
 - [ ] Test is isolated (no shared state)
 - [ ] Test is deterministic (same result every time)

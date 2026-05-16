@@ -13,6 +13,9 @@ npm run dev          # Dev server
 npm run build        # Production build
 npm test             # Run tests
 npm run lint         # Lint
+npm run typecheck    # Type checks (if available)
+npm run ci           # Full verification (if available)
+npm run e2e          # Critical-path/browser verification (if available)
 ```
 
 ## Structure
@@ -25,8 +28,12 @@ src/
   types/          # Type definitions
   config/         # Configuration
 tests/            # Mirrors src/ structure
+tests/scenarios/  # Critical-path scenario checks
 docs/             # SPEC.md, DECISIONS.md
+docs/templates/   # Task / review / scenario templates
+plans/current/    # Active execution briefs
 openspec/specs/   # Feature specifications
+examples/         # Known-good implementation patterns
 ```
 
 ## Naming
@@ -81,10 +88,12 @@ Types: `feat`, `fix`, `docs`, `refactor`, `test`, `chore`
 
 1. Read active OpenSpec artifact (`openspec/changes/*` preferred, else `openspec/specs/*`)
 2. Start/pick a bead and mark `in_progress`
-3. Implement one thin vertical slice with outside-in tests
-4. Run verification (`test`, `lint`, `typecheck` where available)
-5. Checkpoint summary for human approval at phase boundary
-6. Commit with `(bd-xxx)`, sync beads, continue or close
+3. For non-trivial work, create or update a brief in `plans/current/` or `docs/templates/task-brief.md`
+4. Implement one thin vertical slice with outside-in tests
+5. Run verification (`test`, `lint`, `typecheck`, scenarios where available)
+6. Run a second-pass review using `docs/templates/review-prompt.md`
+7. Checkpoint summary for human approval at phase boundary
+8. Commit with `(bd-xxx)`, sync beads, continue or close
 
 ## Git
 
@@ -100,6 +109,7 @@ Branch naming: `feature/*`, `fix/*` from `main`
 ## Always
 
 - Follow outside-in test order: acceptance/E2E -> integration -> unit
+- Prefer scenario-based verification for critical flows, not just low-level tests
 - Run tests before marking work complete
 - Update `docs/DECISIONS.md` for architectural changes
 - Keep bead notes linked to spec paths (`Spec source: openspec/...`)

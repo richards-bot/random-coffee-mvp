@@ -63,10 +63,13 @@ Recommended loop:
 
 1. `bd ready --json`
 2. `/start-bead`
-3. `/plan` for non-trivial work
-4. implement one thin slice
-5. `/checkpoint` at meaningful approval boundaries
-6. `/complete-bead`
+3. create or update `plans/current/TEMPLATE.md` for non-trivial work
+4. `/plan` for non-trivial work
+5. implement one thin slice
+6. run review using `docs/templates/review-prompt.md`
+7. verify critical paths with `docs/templates/scenario-test.md`
+8. `/checkpoint` at meaningful approval boundaries
+9. `/complete-bead`
 
 ## Template self-audit checks
 

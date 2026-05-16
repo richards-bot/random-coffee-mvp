@@ -1,12 +1,12 @@
 # Claude Code Project Template
 
-A ready-to-use project template for building software with [Claude Code](https://code.claude.com/docs/en/setup). It gives Claude structured rules, slash commands, git hooks, and issue tracking out of the box so you can go from idea to working code in a single session.
+A ready-to-use project template for building software with [Claude Code](https://code.claude.com/docs/en/setup). It gives Claude structured rules, slash commands, git hooks, and a fresh issue-tracking workflow so you can go from idea to working code in a single session.
 
 ## What's Included
 
 - **CLAUDE.md** -- Instructions Claude follows automatically (coding style, commit format, workflow)
 - **Slash commands** -- `/brain-dump`, `/start-bead`, `/plan`, `/tdd`, `/checkpoint`, `/complete-bead`, `/code-review`, `/status`
-- **Beads issue tracking** -- Git-backed task tracking that persists across Claude Code sessions
+- **Beads issue tracking** -- Fresh Git-backed task tracking initialised during setup
 - **Hooks** -- Automated guardrails that enforce issue tracking before code changes
 - **Rules** -- Agent behavior, coding style, security, and testing standards in `.claude/rules/`
 - **OpenSpec** -- Lightweight feature specification workflow in `openspec/`
@@ -29,6 +29,8 @@ cd ~/my-project
 
 This copies the template, initializes git, and sets up beads tracking.
 
+Beads state is created fresh for every new project. The template repo itself does **not** ship canonical issue history.
+
 ### 2. Start Claude Code and describe your idea
 
 ```bash
@@ -39,6 +41,8 @@ claude
 The `/brain-dump` command walks you through describing your project. Claude will populate `openspec/project.md`, create feature specs, fill out docs, and create beads issues for each piece of work.
 
 > Optional: if you prefer the native OpenSpec workflow, run `openspec update` and use `/opsx:propose` for spec-first change proposals.
+
+OpenSpec ships here as scaffold only. It becomes "real" once `/brain-dump` or an OpenSpec command creates an actual artifact under `openspec/changes/` or `openspec/specs/`.
 
 ### 3. Start building
 
@@ -109,16 +113,24 @@ After running `setup.sh`, make it yours:
 - **openspec/project.md** -- Set your project identity, tech stack, and constraints
 - **.claude/rules/** -- Adjust coding style, security, or testing rules to match your preferences
 - **.env.example** -- Add your project's environment variables
+- **docs/workflows/template-workflow.md** -- Review the intended setup, delivery loop, and template self-audit checks
 
 ## Manual Setup
 
 If you prefer not to use `setup.sh`:
 
 ```bash
-cp -r project-template my-project
+git clone https://github.com/richpryce/claude-code-project-template.git my-project
 cd my-project
 rm -rf .git .beads setup.sh
 git init
 bd init && bd hooks install
 cp .env.example .env
 ```
+
+If you copy the directory instead of cloning it, copy **this repo root** directly—there is no nested `project-template/` directory.
+
+## Workflow Documentation
+
+- `GETTING-STARTED.md` — setup and daily usage
+- `docs/workflows/template-workflow.md` — bootstrap, OpenSpec + Beads workflow, and template self-audit checks

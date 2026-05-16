@@ -7,7 +7,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "if command -v bd >/dev/null 2>&1 && [ -d .beads ]; then bd list --json 2>/dev/null | grep -q '\"status\":\"in_progress\"' || echo '[Hook] BLOCKED: No in-progress beads issue. Run: bd create \"description\" -p 1 --json && bd update <id> --status in_progress' >&2; fi"
+            "command": "if command -v bd >/dev/null 2>&1 && bd list --json >/dev/null 2>&1; then bd list --json 2>/dev/null | grep -q '\"status\":\"in_progress\"' || echo '[Hook] BLOCKED: No in-progress beads issue. Run: bd create \"description\" -p 1 --json && bd update <id> --status in_progress' >&2; fi"
           }
         ],
         "description": "Enforce beads issue before code changes"
@@ -17,7 +17,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "if command -v bd >/dev/null 2>&1 && [ -d .beads ]; then bd list --json 2>/dev/null | grep -q '\"status\":\"in_progress\"' || echo '[Hook] WARNING: No in-progress beads issue. Commits should reference an issue: git commit -m \"description (bd-xxx)\"' >&2; fi"
+            "command": "if command -v bd >/dev/null 2>&1 && bd list --json >/dev/null 2>&1; then bd list --json 2>/dev/null | grep -q '\"status\":\"in_progress\"' || echo '[Hook] WARNING: No in-progress beads issue. Commits should reference an issue: git commit -m \"description (bd-xxx)\"' >&2; fi"
           }
         ],
         "description": "Warn on commit without active beads issue"
@@ -27,7 +27,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "echo '[Hook] Reminder: Run bd sync before pushing. Run /code-review if needed.'"
+            "command": "if command -v bd >/dev/null 2>&1 && bd list --json >/dev/null 2>&1; then echo '[Hook] Reminder: Run bd sync before pushing. Run /code-review if needed.'; fi"
           }
         ],
         "description": "Reminder to sync beads before push"
@@ -61,7 +61,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "if command -v bd >/dev/null 2>&1 && [ -d .beads ]; then echo '[Hook] Reminder: Run bd sync if you made issue changes this session.' >&2; fi"
+            "command": "if command -v bd >/dev/null 2>&1 && bd list --json >/dev/null 2>&1; then echo '[Hook] Reminder: Run bd sync if you made issue changes this session.' >&2; fi"
           }
         ],
         "description": "Remind to bd sync at session end"

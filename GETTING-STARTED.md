@@ -25,12 +25,14 @@ cd my-project-name
 
 This copies the template, initializes git, and sets up beads tracking in one step.
 
+The new project gets a fresh Beads state. The template itself is scaffold only; it should not be treated as a live tracker database.
+
 ### Manual setup
 
 ```bash
-cp -r project-template my-project-name
+git clone https://github.com/richpryce/claude-code-project-template.git my-project-name
 cd my-project-name
-rm -rf .git
+rm -rf .git .beads setup.sh
 git init
 bd init
 bd hooks install          # Auto-syncs JSONL on commit/pull
@@ -45,6 +47,8 @@ claude
 ```
 
 Share your project idea. Claude will populate `openspec/project.md`, create feature specs in `openspec/specs/`, fill out project docs, and create beads issues linked to each spec.
+
+Until `/brain-dump` or an OpenSpec command creates a real artifact, `openspec/` is only scaffold.
 
 ## Daily Workflow
 
@@ -101,3 +105,4 @@ Share your project idea. Claude will populate `openspec/project.md`, create feat
 - `docs/SPEC.md` — Project specification
 - `docs/DECISIONS.md` — Architecture decisions
 - `openspec/specs/` — Feature specifications
+- `docs/workflows/template-workflow.md` — intended bootstrap + delivery workflow and self-audit checks

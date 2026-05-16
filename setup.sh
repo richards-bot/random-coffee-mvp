@@ -27,7 +27,7 @@ echo "Creating project: $PROJECT_NAME"
 # Copy template
 cp -r "$SCRIPT_DIR" "$DEST"
 
-# Clean up template artifacts
+# Clean up template artifacts and force fresh local workflow state
 cd "$DEST"
 rm -rf .git .beads setup.sh
 
@@ -61,3 +61,7 @@ echo "Next steps:"
 echo "  cd $DEST"
 echo "  claude"
 echo "  > /brain-dump"
+echo ""
+echo "Notes:"
+echo "  - Beads was initialized fresh for this project."
+echo "  - OpenSpec is scaffold-only until you create a real artifact via /brain-dump or openspec commands."

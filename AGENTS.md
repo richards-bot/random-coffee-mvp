@@ -7,14 +7,14 @@ This file exists for compatibility with tools that look for AGENTS.md.
 
 ## Landing the Plane (Session Completion)
 
-**When ending a work session**, you MUST complete ALL steps below. Work is NOT complete until `git push` succeeds.
+**When ending a work session**, you MUST complete ALL steps below. If a remote branch is part of the workflow, do not call the work complete while it only exists locally.
 
 **MANDATORY WORKFLOW:**
 
 1. **File issues for remaining work** - Create issues for anything that needs follow-up
 2. **Run quality gates** (if code changed) - Tests, linters, builds
 3. **Update issue status** - Close finished work, update in-progress items
-4. **PUSH TO REMOTE** - This is MANDATORY:
+4. **PUSH TO REMOTE** - Required when a remote/branch workflow exists:
    ```bash
    git pull --rebase
    bd sync
@@ -26,7 +26,7 @@ This file exists for compatibility with tools that look for AGENTS.md.
 7. **Hand off** - Provide context for next session
 
 **CRITICAL RULES:**
-- Work is NOT complete until `git push` succeeds
-- NEVER stop before pushing - that leaves work stranded locally
-- NEVER say "ready to push when you are" - YOU must push
-- If push fails, resolve and retry until it succeeds
+- If a remote exists for the branch, work is not complete until local changes are published or there is an explicit reason not to publish them yet
+- Do not leave important work stranded locally without saying so clearly
+- Avoid "ready to push when you are" handoffs when the workflow expects the agent to publish changes
+- If push fails in a repo that expects remote publication, resolve and retry or explain the blocker explicitly

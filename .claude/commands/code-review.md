@@ -2,6 +2,8 @@
 
 Review changed files for security and quality issues.
 
+If available, use `docs/templates/review-prompt.md` as the preferred structure for the review output.
+
 ## Instructions
 
 1. Get changed files:

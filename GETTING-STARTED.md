@@ -56,11 +56,13 @@ Until `/brain-dump` or an OpenSpec command creates a real artifact, `openspec/` 
 1. CHECK      bd list --json / bd ready --json
 2. START      bd create "feat: description" -p 1 --json
               bd update <id> --status in_progress
-3. WORK       claude  (AI-assisted development)
-4. CHECKPOINT git add [files] && git commit -m "checkpoint: msg (bd-xxx)"
+3. BRIEF      plans/current/TEMPLATE.md or docs/templates/task-brief.md
+4. WORK       claude  (AI-assisted development)
+5. REVIEW     docs/templates/review-prompt.md + scenario checks
+6. CHECKPOINT git add [files] && git commit -m "checkpoint: msg (bd-xxx)"
               bd sync
-5. TEST       npm test
-6. FINISH     bd close <id> --reason "Completed" --json
+7. TEST       npm test
+8. FINISH     bd close <id> --reason "Completed" --json
               bd sync && git push
 ```
 
@@ -106,3 +108,7 @@ Until `/brain-dump` or an OpenSpec command creates a real artifact, `openspec/` 
 - `docs/DECISIONS.md` — Architecture decisions
 - `openspec/specs/` — Feature specifications
 - `docs/workflows/template-workflow.md` — intended bootstrap + delivery workflow and self-audit checks
+- `docs/templates/task-brief.md` — reusable execution brief
+- `docs/templates/review-prompt.md` — reusable review prompt
+- `docs/templates/scenario-test.md` — scenario-based verification template
+- `plans/current/TEMPLATE.md` — active-plan starting point for non-trivial tasks

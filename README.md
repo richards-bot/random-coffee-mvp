@@ -11,6 +11,7 @@ A ready-to-use project template for building software with [Claude Code](https:/
 - **Rules** -- Agent behavior, coding style, security, and testing standards in `.claude/rules/`
 - **OpenSpec** -- Lightweight feature specification workflow in `openspec/`
 - **Doc templates** -- `SPEC.md` and `DECISIONS.md` for project specs and architecture decisions
+- **Execution templates** -- Task brief, review prompt, scenario test, plan, and PR templates
 
 ## Prerequisites
 
@@ -66,16 +67,25 @@ GETTING-STARTED.md      # Detailed setup and workflow reference
 docs/
   SPEC.md               # Project specification (fill in or use /brain-dump)
   DECISIONS.md           # Architecture decision log
+  templates/            # Reusable task/review/scenario templates
+plans/
+  current/              # Active task briefs and execution plans
 openspec/
   project.md            # Project context (identity, stack, constraints)
   specs/                # Feature specifications
   changes/              # Change proposals for existing features
+.github/
+  pull_request_template.md  # PR summary + verification checklist
 .claude/
   commands/             # Slash commands (/start-bead, /tdd, etc.)
   rules/                # Auto-loaded rules (behavior, style, security, testing)
   hooks.json            # Automated hooks (beads enforcement, console.log warnings)
 src/                    # Source code
+examples/               # Known-good patterns and implementation recipes
 tests/                  # Test files (mirrors src/ structure)
+  unit/                 # Unit tests
+  integration/          # Integration tests
+  scenarios/            # Scenario / critical-path verification
 infrastructure/         # Deployment configs
 .env.example            # Environment variable template
 ```
@@ -99,8 +109,10 @@ The template enforces a simple loop:
 
 1. **Pick work** -- `bd ready` shows unblocked issues, or create one with `bd create`
 2. **Start** -- `bd update <id> --status in_progress`
-3. **Build** -- Write code with Claude. Commit frequently with `(bd-xxx)` in the message.
-4. **Finish** -- `bd close <id>`, run tests, `bd sync`, `git push`
+3. **Brief & plan** -- Fill out `plans/current/TEMPLATE.md` or `docs/templates/task-brief.md` for non-trivial work
+4. **Build** -- Write code with Claude. Commit frequently with `(bd-xxx)` in the message.
+5. **Review & verify** -- Use `docs/templates/review-prompt.md` and scenario checks before merge
+6. **Finish** -- `bd close <id>`, run tests, `bd sync`, `git push`
 
 Hooks automatically warn you if you try to edit code or commit without an active issue.
 
@@ -114,6 +126,8 @@ After running `setup.sh`, make it yours:
 - **.claude/rules/** -- Adjust coding style, security, or testing rules to match your preferences
 - **.env.example** -- Add your project's environment variables
 - **docs/workflows/template-workflow.md** -- Review the intended setup, delivery loop, and template self-audit checks
+- **docs/templates/** -- Tailor the task brief, review prompt, and scenario templates to your stack
+- **examples/** -- Add working patterns you want future agents to reuse
 
 ## Manual Setup
 
@@ -134,3 +148,6 @@ If you copy the directory instead of cloning it, copy **this repo root** directl
 
 - `GETTING-STARTED.md` — setup and daily usage
 - `docs/workflows/template-workflow.md` — bootstrap, OpenSpec + Beads workflow, and template self-audit checks
+- `docs/templates/task-brief.md` — brief for non-trivial work
+- `docs/templates/review-prompt.md` — reusable adversarial review prompt
+- `docs/templates/scenario-test.md` — critical-path scenario template

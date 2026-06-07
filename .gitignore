@@ -1,26 +1,42 @@
-# Dependencies
-node_modules/
-vendor/
+# Python environments and caches
 .venv/
 venv/
 __pycache__/
-*.pyc
-
-# Build outputs
-dist/
-build/
-out/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
 *.egg-info/
 
-# Environment & secrets
+# Build/test outputs
+build/
+dist/
+coverage/
+.coverage
+htmlcov/
+
+# Generated scheduler output; GitHub Actions commits selected JSON outputs when a run executes.
+# Keep this unignored so weekly generated mock-event artifacts can be versioned.
+# output/
+
+# Environment and secrets
 .env
-.env.local
-.env.*.local
+.env.*
+!.env.example
 *.pem
 *.key
+*.p12
+*.pfx
 secrets/
 
-# IDE & editors
+# Logs and runtime files
+logs/
+*.log
+*.pid
+*.seed
+*.tmp
+*.bak
+
+# Editors and OS files
 .idea/
 .vscode/
 *.swp
@@ -29,49 +45,10 @@ secrets/
 .DS_Store
 Thumbs.db
 
-# Test & coverage
-coverage/
-.coverage
-htmlcov/
-.pytest_cache/
-.nyc_output/
-
-# Logs
-logs/
-*.log
-npm-debug.log*
-
-# Runtime
-*.pid
-*.seed
-pids/
-
-# Temp files
-tmp/
-temp/
-*.tmp
-*.bak
-
-# Package locks (uncomment if using specific package manager)
-# yarn.lock
-# pnpm-lock.yaml
-
-# OS files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-
-# Beads temp files
-.bd/tmp/
-*.bead.tmp
-
 # OpenSpec drafts
 openspec/drafts/
 *.draft.md
 
-# Dolt database files (added by bd init)
+# Beads/Dolt runtime files are also handled by .beads/.gitignore
 .dolt/
 *.db

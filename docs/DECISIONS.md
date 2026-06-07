@@ -28,3 +28,14 @@
 
 **Consequences:**
 - Real Google Calendar integration can be added later by implementing the same adapter boundary.
+
+## 2026-06-07: Production Google Calendar auth strategy
+
+**Decision:** Use a Google Workspace service account with domain-wide delegation, impersonating a dedicated organiser account such as `random-coffee@example.com`, for production Calendar event creation.
+
+**Rationale:** This is the best fit for unattended GitHub Actions automation in a Workspace organisation. It avoids long-lived user refresh tokens, avoids tying event ownership to a human account, and lets Workspace admins constrain the app to Calendar event scopes.
+
+**Consequences:**
+- Workspace admin setup is required.
+- Credentials must be stored in GitHub Secrets or a protected GitHub Actions environment, never in git.
+- The real Google adapter must use deterministic event IDs and conflict recovery to make reruns safe after partial failures.

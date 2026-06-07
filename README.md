@@ -10,8 +10,24 @@ The app keeps a YAML list of participants, generates history-aware random 1:1 pa
 - Pairings avoid historical repeats where possible.
 - Meetings are spread across configured Tue/Wed/Thu/Fri slots rather than one global time.
 - If a slot does not work, participants reschedule via Google Calendar's “propose a new time” flow or by messaging each other.
-- Calendar integration is mocked for now; no Google API key or OAuth token is needed.
+- Calendar integration is mocked for now; no Google API credentials are needed.
 - `data/history.yaml` is the source of truth for already-created weeks, making default runs idempotent.
+
+## Production Google Calendar strategy
+
+The production-grade strategy is documented in:
+
+```text
+docs/GOOGLE_CALENDAR_PRODUCTION.md
+```
+
+Recommended approach:
+
+- Dedicated organiser account, e.g. `random-coffee@example.com`.
+- Google Workspace service account with domain-wide delegation.
+- GitHub Actions secrets for credentials.
+- A real `GoogleCalendarClient` adapter behind the existing mock calendar boundary.
+- Deterministic Google event IDs to make retries safe and avoid duplicate invites.
 
 ## Repository layout
 
@@ -20,11 +36,16 @@ The app keeps a YAML list of participants, generates history-aware random 1:1 pa
 config/participants.yaml                    # mock list of 50 emails
 config/schedule.yaml                        # slots and meeting settings
 data/history.yaml                           # scheduler-updated history
-output/mock-calendar-events/                # generated mock invite JSON
-src/random_coffee/                          # Python scheduler package
-tests/                                      # pytest suite
-docs/SPEC.md                               # product/technical spec
+docs/                                      # spec, decisions, production setup
 openspec/specs/random-coffee-mvp/spec.md    # OpenSpec-style acceptance criteria
+src/random_coffee/                          # Python scheduler package
+tests/test_random_coffee.py                 # pytest suite
+```
+
+Generated mock event output is written to:
+
+```text
+output/mock-calendar-events/<week>.json
 ```
 
 ## Local usage
@@ -33,6 +54,12 @@ Install dependencies and run tests:
 
 ```bash
 uv run pytest -q
+```
+
+Run linting:
+
+```bash
+uv run ruff check .
 ```
 
 Generate a specific week locally:
@@ -71,13 +98,6 @@ The workflow:
 4. Runs the scheduler.
 5. Commits changes to `data/history.yaml` and `output/mock-calendar-events/*.json` if there are any.
 
-## Moving from mock to real Google Calendar later
+## Current limitation
 
-The scheduler currently uses `MockCalendarClient`, which returns Google Calendar-like event payloads. A later `GoogleCalendarClient` can implement the same boundary and call the real Google Calendar API using a dedicated organiser account.
-
-Recommended real-world setup later:
-
-- Dedicated organiser calendar account, e.g. `random-coffee@example.com`.
-- Calendar write permissions only.
-- Keep the existing idempotency check before making real API calls.
-- Add a review-before-send mode if humans want to inspect pairings before calendar creation.
+The scheduler currently uses `MockCalendarClient`; it does not yet send real Google Calendar invites. See `docs/GOOGLE_CALENDAR_PRODUCTION.md` for the exact implementation and operational steps required to make this production-ready.

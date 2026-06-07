@@ -1,145 +1,52 @@
 # Agent Instructions
 
-See [CLAUDE.md](CLAUDE.md) for all agent instructions.
-See [.claude/rules/](./claude/rules/) for coding style, security, testing, and behavior rules.
+See `CLAUDE.md` for project commands, structure, and workflow rules.
 
-This file exists for compatibility with tools that look for AGENTS.md.
+This repository uses **bd / Beads** for issue tracking. Do not create separate markdown TODO lists for work tracking.
 
-## Landing the Plane (Session Completion)
+## Required workflow
 
-**When ending a work session**, you MUST complete ALL steps below. If a remote branch is part of the workflow, do not call the work complete while it only exists locally.
+1. Check existing work:
 
-**MANDATORY WORKFLOW:**
-
-1. **File issues for remaining work** - Create issues for anything that needs follow-up
-2. **Run quality gates** (if code changed) - Tests, linters, builds
-3. **Update issue status** - Close finished work, update in-progress items
-4. **PUSH TO REMOTE** - Required when a remote/branch workflow exists:
    ```bash
-   git pull --rebase
-   bd sync
-   git push
-   git status  # MUST show "up to date with origin"
+   bd list --json
+   bd ready --json
    ```
-5. **Clean up** - Clear stashes, prune remote branches
-6. **Verify** - All changes committed AND pushed
-7. **Hand off** - Provide context for next session
 
-**CRITICAL RULES:**
-- If a remote exists for the branch, work is not complete until local changes are published or there is an explicit reason not to publish them yet
-- Do not leave important work stranded locally without saying so clearly
-- Avoid "ready to push when you are" handoffs when the workflow expects the agent to publish changes
-- If push fails in a repo that expects remote publication, resolve and retry or explain the blocker explicitly
+2. Create or claim a bead before changing files:
 
-<!-- BEGIN BEADS INTEGRATION -->
-## Issue Tracking with bd (beads)
-
-**IMPORTANT**: This project uses **bd (beads)** for ALL issue tracking. Do NOT use markdown TODOs, task lists, or other tracking methods.
-
-### Why bd?
-
-- Dependency-aware: Track blockers and relationships between issues
-- Git-friendly: Dolt-powered version control with native sync
-- Agent-optimized: JSON output, ready work detection, discovered-from links
-- Prevents duplicate tracking systems and confusion
-
-### Quick Start
-
-**Check for ready work:**
-
-```bash
-bd ready --json
-```
-
-**Create new issues:**
-
-```bash
-bd create "Issue title" --description="Detailed context" -t bug|feature|task -p 0-4 --json
-bd create "Issue title" --description="What this issue is about" -p 1 --deps discovered-from:bd-123 --json
-```
-
-**Claim and update:**
-
-```bash
-bd update <id> --claim --json
-bd update bd-42 --priority 1 --json
-```
-
-**Complete work:**
-
-```bash
-bd close bd-42 --reason "Completed" --json
-```
-
-### Issue Types
-
-- `bug` - Something broken
-- `feature` - New functionality
-- `task` - Work item (tests, docs, refactoring)
-- `epic` - Large feature with subtasks
-- `chore` - Maintenance (dependencies, tooling)
-
-### Priorities
-
-- `0` - Critical (security, data loss, broken builds)
-- `1` - High (major features, important bugs)
-- `2` - Medium (default, nice-to-have)
-- `3` - Low (polish, optimization)
-- `4` - Backlog (future ideas)
-
-### Workflow for AI Agents
-
-1. **Check ready work**: `bd ready` shows unblocked issues
-2. **Claim your task atomically**: `bd update <id> --claim`
-3. **Work on it**: Implement, test, document
-4. **Discover new work?** Create linked issue:
-   - `bd create "Found bug" --description="Details about what was found" -p 1 --deps discovered-from:<parent-id>`
-5. **Complete**: `bd close <id> --reason "Done"`
-
-### Auto-Sync
-
-bd automatically syncs via Dolt:
-
-- Each write auto-commits to Dolt history
-- Use `bd dolt push`/`bd dolt pull` for remote sync
-- No manual export/import needed!
-
-### Important Rules
-
-- ✅ Use bd for ALL task tracking
-- ✅ Always use `--json` flag for programmatic use
-- ✅ Link discovered work with `discovered-from` dependencies
-- ✅ Check `bd ready` before asking "what should I work on?"
-- ❌ Do NOT create markdown TODO lists
-- ❌ Do NOT use external issue trackers
-- ❌ Do NOT duplicate tracking systems
-
-For more details, see README.md and docs/QUICKSTART.md.
-
-## Landing the Plane (Session Completion)
-
-**When ending a work session**, you MUST complete ALL steps below. Work is NOT complete until `git push` succeeds.
-
-**MANDATORY WORKFLOW:**
-
-1. **File issues for remaining work** - Create issues for anything that needs follow-up
-2. **Run quality gates** (if code changed) - Tests, linters, builds
-3. **Update issue status** - Close finished work, update in-progress items
-4. **PUSH TO REMOTE** - This is MANDATORY:
    ```bash
-   git pull --rebase
-   bd sync
-   git push
-   git status  # MUST show "up to date with origin"
+   bd create "Short task title" --description "Context" -p 1 --type task --json
+   bd update <id> --status in_progress --json
    ```
-5. **Clean up** - Clear stashes, prune remote branches
-6. **Verify** - All changes committed AND pushed
-7. **Hand off** - Provide context for next session
 
-**CRITICAL RULES:**
-- Work is NOT complete until `git push` succeeds
-- NEVER stop before pushing - that leaves work stranded locally
-- NEVER say "ready to push when you are" - YOU must push
-- If push fails, resolve and retry until it succeeds
+3. Commit meaningful slices with the bead ID in the message:
 
-<!-- END BEADS INTEGRATION -->
+   ```bash
+   git commit -m "docs: update setup guide (<bead-id>)"
+   ```
+
+4. Run quality gates before handoff:
+
+   ```bash
+   uv run ruff check .
+   uv run pytest -q
+   ```
+
+5. Close the bead and commit Beads state:
+
+   ```bash
+   bd close <id> --reason "Completed" --json
+   bd vc commit -m "Close <task> bead"
+   ```
+
+6. Push completed work when a remote exists:
+
+   ```bash
+   git push
+   git status --short --branch
+   ```
+
+## Security
+
+Never commit Google credentials, service account JSON, OAuth refresh tokens, or real API keys. Use GitHub Secrets / protected environments for production credentials.

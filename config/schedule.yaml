@@ -1,0 +1,22 @@
+timezone: Europe/London
+meeting:
+  duration_minutes: 15
+  title_template: "Random Coffee: {names}"
+  create_google_meet: true
+slots:
+  - day: Tuesday
+    time: "10:00"
+  - day: Tuesday
+    time: "14:30"
+  - day: Wednesday
+    time: "10:00"
+  - day: Wednesday
+    time: "15:00"
+  - day: Thursday
+    time: "11:00"
+  - day: Thursday
+    time: "14:00"
+  - day: Friday
+    time: "10:30"
+  - day: Friday
+    time: "14:30"

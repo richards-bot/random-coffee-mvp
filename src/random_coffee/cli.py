@@ -14,7 +14,10 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--output-dir", type=Path, default=Path("output/mock-calendar-events")
     )
-    parser.add_argument("--week-start", help="Target Monday as YYYY-MM-DD; defaults to current week")
+    parser.add_argument(
+        "--week-start",
+        help="Target Monday as YYYY-MM-DD; defaults to current week",
+    )
     parser.add_argument("--seed", type=int, help="Deterministic random seed")
     parser.add_argument("--force", action="store_true", help="Regenerate an existing week")
     return parser

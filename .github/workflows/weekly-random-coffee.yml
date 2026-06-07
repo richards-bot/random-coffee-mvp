@@ -1,0 +1,73 @@
+name: Weekly Random Coffee
+
+on:
+  schedule:
+    # Monday morning UTC. Coffee slots themselves are resolved in Europe/London.
+    - cron: "0 8 * * 1"
+  workflow_dispatch:
+    inputs:
+      week_start:
+        description: "Target Monday as YYYY-MM-DD. Empty = current week."
+        required: false
+        type: string
+      seed:
+        description: "Deterministic random seed. Empty = derived from week_start."
+        required: false
+        type: string
+      force:
+        description: "Regenerate an existing week and replace its history entry."
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+
+jobs:
+  schedule-random-coffee:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Set up Python
+        run: uv python install 3.11
+
+      - name: Run tests
+        run: uv run pytest -q
+
+      - name: Generate random coffee pairings and mock invites
+        run: |
+          set -euo pipefail
+          ARGS=()
+          if [ -n "${{ inputs.week_start }}" ]; then
+            ARGS+=(--week-start "${{ inputs.week_start }}")
+          fi
+          if [ -n "${{ inputs.seed }}" ]; then
+            ARGS+=(--seed "${{ inputs.seed }}")
+          fi
+          if [ "${{ inputs.force }}" = "true" ]; then
+            ARGS+=(--force)
+          fi
+          uv run python -m random_coffee.cli "${ARGS[@]}"
+
+      - name: Commit generated history and mock events
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/history.yaml output/mock-calendar-events/*.json 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "No scheduler changes to commit."
+            exit 0
+          fi
+          git commit -m "chore: update random coffee history [skip ci]"
+          git push

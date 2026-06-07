@@ -22,7 +22,7 @@ class HistoryStore:
     weeks: list[HistoryWeek]
 
     @classmethod
-    def load(cls, path: Path) -> "HistoryStore":
+    def load(cls, path: Path) -> HistoryStore:
         if not path.exists():
             return cls(path=path, weeks=[])
         raw = yaml.safe_load(path.read_text(encoding="utf-8")) or {}

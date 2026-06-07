@@ -47,7 +47,8 @@ class MockCalendarClient:
         meeting: MeetingConfig,
     ) -> MockCalendarEvent:
         names = " + ".join(_display_name(email) for email in pairing.participants)
-        digest = hashlib.sha1("|".join((week_start, *pairing.participants)).encode()).hexdigest()[:12]
+        digest_source = "|".join((week_start, *pairing.participants)).encode()
+        digest = hashlib.sha1(digest_source).hexdigest()[:12]
         description = (
             "You’ve been randomly paired for a 15-minute coffee chat this week.\n\n"
             "No agenda or prep needed — just get to know each other.\n\n"

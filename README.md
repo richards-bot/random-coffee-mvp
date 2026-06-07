@@ -1,153 +1,83 @@
-# Claude Code Project Template
+# Random Coffee MVP
 
-A ready-to-use project template for building software with [Claude Code](https://code.claude.com/docs/en/setup). It gives Claude structured rules, slash commands, git hooks, and a fresh issue-tracking workflow so you can go from idea to working code in a single session.
+A repository-native MVP for weekly random coffee chats.
 
-## What's Included
+The app keeps a YAML list of participants, generates history-aware random 1:1 pairings, assigns each pair to one of several configured coffee slots, writes mock Google Calendar event payloads, updates YAML history, and is designed to run from GitHub Actions.
 
-- **CLAUDE.md** -- Instructions Claude follows automatically (coding style, commit format, workflow)
-- **Slash commands** -- `/brain-dump`, `/start-bead`, `/plan`, `/tdd`, `/checkpoint`, `/complete-bead`, `/code-review`, `/status`
-- **Beads issue tracking** -- Fresh Git-backed task tracking initialised during setup
-- **Hooks** -- Automated guardrails that enforce issue tracking before code changes
-- **Rules** -- Agent behavior, coding style, security, and testing standards in `.claude/rules/`
-- **OpenSpec** -- Lightweight feature specification workflow in `openspec/`
-- **Doc templates** -- `SPEC.md` and `DECISIONS.md` for project specs and architecture decisions
-- **Execution templates** -- Task brief, review prompt, scenario test, plan, and PR templates
+## MVP behaviour
 
-## Prerequisites
+- 50 active participants become 25 separate 15-minute coffee invites.
+- Pairings avoid historical repeats where possible.
+- Meetings are spread across configured Tue/Wed/Thu/Fri slots rather than one global time.
+- If a slot does not work, participants reschedule via Google Calendar's “propose a new time” flow or by messaging each other.
+- Calendar integration is mocked for now; no Google API key or OAuth token is needed.
+- `data/history.yaml` is the source of truth for already-created weeks, making default runs idempotent.
 
-- [Claude Code](https://code.claude.com/docs/en/setup) (`curl -fsSL https://claude.ai/install.sh | bash`)
-- [Beads](https://github.com/steveyegge/beads) (`npm install -g @beads/bd` or `brew install beads`)
-- [OpenSpec](https://openspec.dev/) (`npm install -g @fission-ai/openspec@latest`)
+## Repository layout
 
-## Quick Start
+```text
+.github/workflows/weekly-random-coffee.yml  # weekly/manual scheduler
+config/participants.yaml                    # mock list of 50 emails
+config/schedule.yaml                        # slots and meeting settings
+data/history.yaml                           # scheduler-updated history
+output/mock-calendar-events/                # generated mock invite JSON
+src/random_coffee/                          # Python scheduler package
+tests/                                      # pytest suite
+docs/SPEC.md                               # product/technical spec
+openspec/specs/random-coffee-mvp/spec.md    # OpenSpec-style acceptance criteria
+```
 
-### 1. Create your project
+## Local usage
+
+Install dependencies and run tests:
 
 ```bash
-./setup.sh my-project
-cd ~/my-project
+uv run pytest -q
 ```
 
-This copies the template, initializes git, and sets up beads tracking.
-
-Beads state is created fresh for every new project. The template repo itself does **not** ship canonical issue history.
-
-### 2. Start Claude Code and describe your idea
+Generate a specific week locally:
 
 ```bash
-claude
-> /brain-dump
+uv run python -m random_coffee.cli --week-start 2026-06-08 --seed 12345
 ```
 
-The `/brain-dump` command walks you through describing your project. Claude will populate `openspec/project.md`, create feature specs, fill out docs, and create beads issues for each piece of work.
-
-> Optional: if you prefer the native OpenSpec workflow, run `openspec update` and use `/opsx:propose` for spec-first change proposals.
-
-OpenSpec ships here as scaffold only. It becomes "real" once `/brain-dump` or an OpenSpec command creates an actual artifact under `openspec/changes/` or `openspec/specs/`.
-
-### 3. Start building
+Run again without `--force` and it will skip because the week already exists in `data/history.yaml`:
 
 ```bash
-> /start-bead
+uv run python -m random_coffee.cli --week-start 2026-06-08 --seed 99999
 ```
 
-Claude picks up an issue, marks it in-progress, and starts working. When you're done:
+Regenerate a week during development:
 
 ```bash
-> /complete-bead
+uv run python -m random_coffee.cli --week-start 2026-06-08 --seed 99999 --force
 ```
 
-This runs tests, commits, closes the issue, and syncs.
+## GitHub Actions
 
-## Project Structure
+The workflow runs every Monday morning UTC and can also be triggered manually.
 
-```
-CLAUDE.md               # Agent instructions (auto-loaded by Claude Code)
-GETTING-STARTED.md      # Detailed setup and workflow reference
-docs/
-  SPEC.md               # Project specification (fill in or use /brain-dump)
-  DECISIONS.md           # Architecture decision log
-  templates/            # Reusable task/review/scenario templates
-plans/
-  current/              # Active task briefs and execution plans
-openspec/
-  project.md            # Project context (identity, stack, constraints)
-  specs/                # Feature specifications
-  changes/              # Change proposals for existing features
-.github/
-  pull_request_template.md  # PR summary + verification checklist
-.claude/
-  commands/             # Slash commands (/start-bead, /tdd, etc.)
-  rules/                # Auto-loaded rules (behavior, style, security, testing)
-  hooks.json            # Automated hooks (beads enforcement, console.log warnings)
-src/                    # Source code
-examples/               # Known-good patterns and implementation recipes
-tests/                  # Test files (mirrors src/ structure)
-  unit/                 # Unit tests
-  integration/          # Integration tests
-  scenarios/            # Scenario / critical-path verification
-infrastructure/         # Deployment configs
-.env.example            # Environment variable template
-```
+Manual inputs:
 
-## Slash Commands
+- `week_start`: target Monday, e.g. `2026-06-08`; empty means current week.
+- `seed`: deterministic pairing seed; empty means derived from the week.
+- `force`: replace an existing week in history.
 
-| Command | What it does |
-|---------|-------------|
-| `/brain-dump` | Turn an unstructured idea into specs, docs, and issues |
-| `/start-bead` | Pick or create a beads issue and start work |
-| `/complete-bead` | Run tests, commit, close the issue, sync |
-| `/checkpoint` | Stage, commit, and sync current progress |
-| `/plan` | Design an approach and wait for your approval before coding |
-| `/tdd` | Test-driven development cycle (red/green/refactor) |
-| `/code-review` | Security and quality review of recent changes |
-| `/status` | Show issues, git state, and ready tasks |
+The workflow:
 
-## Workflow
+1. Checks out the repo.
+2. Installs Python dependencies with `uv`.
+3. Runs the tests.
+4. Runs the scheduler.
+5. Commits changes to `data/history.yaml` and `output/mock-calendar-events/*.json` if there are any.
 
-The template enforces a simple loop:
+## Moving from mock to real Google Calendar later
 
-1. **Pick work** -- `bd ready` shows unblocked issues, or create one with `bd create`
-2. **Start** -- `bd update <id> --status in_progress`
-3. **Brief & plan** -- Fill out `plans/current/TEMPLATE.md` or `docs/templates/task-brief.md` for non-trivial work
-4. **Build** -- Write code with Claude. Commit frequently with `(bd-xxx)` in the message.
-5. **Review & verify** -- Use `docs/templates/review-prompt.md` and scenario checks before merge
-6. **Finish** -- `bd close <id>`, run tests, `bd sync`, `git push`
+The scheduler currently uses `MockCalendarClient`, which returns Google Calendar-like event payloads. A later `GoogleCalendarClient` can implement the same boundary and call the real Google Calendar API using a dedicated organiser account.
 
-Hooks automatically warn you if you try to edit code or commit without an active issue.
+Recommended real-world setup later:
 
-## Customising the Template
-
-After running `setup.sh`, make it yours:
-
-- **CLAUDE.md** -- Update the project overview, stack, and commands sections
-- **docs/SPEC.md** -- Fill in your project specification (or let `/brain-dump` do it)
-- **openspec/project.md** -- Set your project identity, tech stack, and constraints
-- **.claude/rules/** -- Adjust coding style, security, or testing rules to match your preferences
-- **.env.example** -- Add your project's environment variables
-- **docs/workflows/template-workflow.md** -- Review the intended setup, delivery loop, and template self-audit checks
-- **docs/templates/** -- Tailor the task brief, review prompt, and scenario templates to your stack
-- **examples/** -- Add working patterns you want future agents to reuse
-
-## Manual Setup
-
-If you prefer not to use `setup.sh`:
-
-```bash
-git clone https://github.com/richpryce/claude-code-project-template.git my-project
-cd my-project
-rm -rf .git .beads setup.sh
-git init
-bd init && bd hooks install
-cp .env.example .env
-```
-
-If you copy the directory instead of cloning it, copy **this repo root** directly—there is no nested `project-template/` directory.
-
-## Workflow Documentation
-
-- `GETTING-STARTED.md` — setup and daily usage
-- `docs/workflows/template-workflow.md` — bootstrap, OpenSpec + Beads workflow, and template self-audit checks
-- `docs/templates/task-brief.md` — brief for non-trivial work
-- `docs/templates/review-prompt.md` — reusable adversarial review prompt
-- `docs/templates/scenario-test.md` — critical-path scenario template
+- Dedicated organiser calendar account, e.g. `random-coffee@example.com`.
+- Calendar write permissions only.
+- Keep the existing idempotency check before making real API calls.
+- Add a review-before-send mode if humans want to inspect pairings before calendar creation.

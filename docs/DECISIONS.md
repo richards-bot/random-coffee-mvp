@@ -1,36 +1,30 @@
-# Architecture Decision Log
+# Architecture Decisions
 
-Record significant technical decisions here. AI agents read this to understand why things are the way they are.
+## 2026-06-07: Repository-native MVP
 
-## Template
+**Decision:** Use a GitHub repository as the source of truth for MVP state: YAML participant config, YAML scheduling config, YAML history, and JSON mock calendar output.
 
-```markdown
-## ADR-XXX: [Title]
+**Rationale:** Ricky asked for a GitHub Action scheduler, YAML email list, GitHub-hosted history, and no real Google API key yet. This avoids databases/hosting while preserving auditability and easy review.
 
-**Date:** YYYY-MM-DD | **Status:** Proposed | Accepted | Deprecated | Superseded by ADR-XXX
+**Consequences:**
+- GitHub Actions needs write permissions to commit history/output.
+- YAML history will eventually become awkward if the tool grows, but is appropriate for MVP.
 
-### Context
-[Why are we making this decision?]
+## 2026-06-07: Spread meetings across configured slots
 
-### Decision
-[What did we decide?]
+**Decision:** Assign pairings to a small configured set of Tue/Wed/Thu coffee slots rather than one global meeting time.
 
-### Options Considered
-- **Option A:** [Pros] / [Cons]
-- **Option B:** [Pros] / [Cons]
+**Rationale:** Spreading slots reduces clashes. Participants can reschedule the calendar invite if their assigned slot does not work.
 
-### Consequences
-[What becomes easier or harder?]
-```
+**Consequences:**
+- The app does not need invasive free/busy calendar permissions.
+- Some people may still need to use Google Calendar's “propose new time” flow.
 
----
+## 2026-06-07: Mock calendar adapter first
 
-## Decisions
+**Decision:** Implement calendar creation behind a mock adapter that writes event payloads to JSON files.
 
-_None yet. Add the first ADR when a significant technical choice is made._
+**Rationale:** The MVP should prove scheduling, pair generation, idempotency, and GitHub Actions behaviour without requiring Google credentials.
 
-## Quick Reference
-
-| ADR | Title | Status | Date |
-|-----|-------|--------|------|
-| — | — | — | — |
+**Consequences:**
+- Real Google Calendar integration can be added later by implementing the same adapter boundary.

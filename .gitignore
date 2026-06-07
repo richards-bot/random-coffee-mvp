@@ -71,3 +71,7 @@ ehthumbs.db
 # OpenSpec drafts
 openspec/drafts/
 *.draft.md
+
+# Dolt database files (added by bd init)
+.dolt/
+*.db

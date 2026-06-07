@@ -1,0 +1,7 @@
+{
+  "database": "dolt",
+  "backend": "dolt",
+  "dolt_mode": "server",
+  "dolt_database": "random_coffee_mvp",
+  "project_id": "12228dc6-4042-44af-aa9a-979b99eb3369"
+}

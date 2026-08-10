@@ -1,0 +1,302 @@
+[
+  {
+    "event_id": "mock_2026-08-10_93113ed585f4",
+    "summary": "Random Coffee: Person37 + Person50",
+    "start": "2026-08-11T10:00:00+01:00",
+    "end": "2026-08-11T10:15:00+01:00",
+    "attendees": [
+      "person37@example.com",
+      "person50@example.com"
+    ],
+    "description": "You\u2019ve been randomly paired for a 15-minute coffee chat this week.\n\nNo agenda or prep needed \u2014 just get to know each other.\n\nIf this time does not work, please use Google Calendar's \u2018Propose a new time\u2019 or message each other and move the coffee chat to a better slot.",
+    "google_meet_requested": true
+  },
+  {
+    "event_id": "mock_2026-08-10_3de076aeeb3b",
+    "summary": "Random Coffee: Person20 + Person46",
+    "start": "2026-08-11T14:30:00+01:00",
+    "end": "2026-08-11T14:45:00+01:00",
+    "attendees": [
+      "person20@example.com",
+      "person46@example.com"
+    ],
+    "description": "You\u2019ve been randomly paired for a 15-minute coffee chat this week.\n\nNo agenda or prep needed \u2014 just get to know each other.\n\nIf this time does not work, please use Google Calendar's \u2018Propose a new time\u2019 or message each other and move the coffee chat to a better slot.",
+    "google_meet_requested": true
+  },
+  {
+    "event_id": "mock_2026-08-10_d8d24d37cc92",
+    "summary": "Random Coffee: Person19 + Person33",
+    "start": "2026-08-12T10:00:00+01:00",
+    "end": "2026-08-12T10:15:00+01:00",
+    "attendees": [
+      "person19@example.com",
+      "person33@example.com"
+    ],
+    "description": "You\u2019ve been randomly paired for a 15-minute coffee chat this week.\n\nNo agenda or prep needed \u2014 just get to know each other.\n\nIf this time does not work, please use Google Calendar's \u2018Propose a new time\u2019 or message each other and move the coffee chat to a better slot.",
+    "google_meet_requested": true
+  },
+  {
+    "event_id": "mock_2026-08-10_c958a295bd55",
+    "summary": "Random Coffee: Person10 + Person21",
+    "start": "2026-08-12T15:00:00+01:00",
+    "end": "2026-08-12T15:15:00+01:00",
+    "attendees": [
+      "person10@example.com",
+      "person21@example.com"
+    ],
+    "description": "You\u2019ve been randomly paired for a 15-minute coffee chat this week.\n\nNo agenda or prep needed \u2014 just get to know each other.\n\nIf this time does not work, please use Google Calendar's \u2018Propose a new time\u2019 or message each other and move the coffee chat to a better slot.",
+    "google_meet_requested": true
+  },
+  {
+    "event_id": "mock_2026-08-10_11f39bd4eb41",
+    "summary": "Random Coffee: Person08 + Person13",
+    "start": "2026-08-13T11:00:00+01:00",
+    "end": "2026-08-13T11:15:00+01:00",
+    "attendees": [
+      "person08@example.com",
+      "person13@example.com"
+    ],
+    "description": "You\u2019ve been randomly paired for a 15-minute coffee chat this week.\n\nNo agenda or prep needed \u2014 just get to know each other.\n\nIf this time does not work, please use Google Calendar's \u2018Propose a new time\u2019 or message each other and move the coffee chat to a better slot.",
+    "google_meet_requested": true
+  },
+  {
+    "event_id": "mock_2026-08-10_035fd43d5818",
+    "summary": "Random Coffee: Person18 + Person40",
+    "start": "2026-08-13T14:00:00+01:00",
+    "end": "2026-08-13T14:15:00+01:00",
+    "attendees": [
+      "person18@example.com",
+      "person40@example.com"
+    ],
+    "description": "You\u2019ve been randomly paired for a 15-minute coffee chat this week.\n\nNo agenda or prep needed \u2014 just get to know each other.\n\nIf this time does not work, please use Google Calendar's \u2018Propose a new time\u2019 or message each other and move the coffee chat to a better slot.",
+    "google_meet_requested": true
+  },
+  {
+    "event_id": "mock_2026-08-10_22d394296cd4",
+    "summary": "Random Coffee: Person14 + Person28",
+    "start": "2026-08-14T10:30:00+01:00",
+    "end": "2026-08-14T10:45:00+01:00",
+    "attendees": [
+      "person14@example.com",
+      "person28@example.com"
+    ],
+    "description": "You\u2019ve been randomly paired for a 15-minute coffee chat this week.\n\nNo agenda or prep needed \u2014 just get to know each other.\n\nIf this time does not work, please use Google Calendar's \u2018Propose a new time\u2019 or message each other and move the coffee chat to a better slot.",
+    "google_meet_requested": true
+  },
+  {
+    "event_id": "mock_2026-08-10_994092d9bfac",
+    "summary": "Random Coffee: Person23 + Person47",
+    "start": "2026-08-14T14:30:00+01:00",
+    "end": "2026-08-14T14:45:00+01:00",
+    "attendees": [
+      "person23@example.com",
+      "person47@example.com"
+    ],
+    "description": "You\u2019ve been randomly paired for a 15-minute coffee chat this week.\n\nNo agenda or prep needed \u2014 just get to know each other.\n\nIf this time does not work, please use Google Calendar's \u2018Propose a new time\u2019 or message each other and move the coffee chat to a better slot.",
+    "google_meet_requested": true
+  },
+  {
+    "event_id": "mock_2026-08-10_160e74198df2",
+    "summary": "Random Coffee: Person29 + Person36",
+    "start": "2026-08-11T10:00:00+01:00",
+    "end": "2026-08-11T10:15:00+01:00",
+    "attendees": [
+      "person29@example.com",
+      "person36@example.com"
+    ],
+    "description": "You\u2019ve been randomly paired for a 15-minute coffee chat this week.\n\nNo agenda or prep needed \u2014 just get to know each other.\n\nIf this time does not work, please use Google Calendar's \u2018Propose a new time\u2019 or message each other and move the coffee chat to a better slot.",
+    "google_meet_requested": true
+  },
+  {
+    "event_id": "mock_2026-08-10_7c432b41a572",
+    "summary": "Random Coffee: Person01 + Person44",
+    "start": "2026-08-11T14:30:00+01:00",
+    "end": "2026-08-11T14:45:00+01:00",
+    "attendees": [
+      "person01@example.com",
+      "person44@example.com"
+    ],
+    "description": "You\u2019ve been randomly paired for a 15-minute coffee chat this week.\n\nNo agenda or prep needed \u2014 just get to know each other.\n\nIf this time does not work, please use Google Calendar's \u2018Propose a new time\u2019 or message each other and move the coffee chat to a better slot.",
+    "google_meet_requested": true
+  },
+  {
+    "event_id": "mock_2026-08-10_039586207624",
+    "summary": "Random Coffee: Person02 + Person32",
+    "start": "2026-08-12T10:00:00+01:00",
+    "end": "2026-08-12T10:15:00+01:00",
+    "attendees": [
+      "person02@example.com",
+      "person32@example.com"
+    ],
+    "description": "You\u2019ve been randomly paired for a 15-minute coffee chat this week.\n\nNo agenda or prep needed \u2014 just get to know each other.\n\nIf this time does not work, please use Google Calendar's \u2018Propose a new time\u2019 or message each other and move the coffee chat to a better slot.",
+    "google_meet_requested": true
+  },
+  {
+    "event_id": "mock_2026-08-10_fe5949b3fe0e",
+    "summary": "Random Coffee: Person09 + Person15",
+    "start": "2026-08-12T15:00:00+01:00",
+    "end": "2026-08-12T15:15:00+01:00",
+    "attendees": [
+      "person09@example.com",
+      "person15@example.com"
+    ],
+    "description": "You\u2019ve been randomly paired for a 15-minute coffee chat this week.\n\nNo agenda or prep needed \u2014 just get to know each other.\n\nIf this time does not work, please use Google Calendar's \u2018Propose a new time\u2019 or message each other and move the coffee chat to a better slot.",
+    "google_meet_requested": true
+  },
+  {
+    "event_id": "mock_2026-08-10_22007e361b41",
+    "summary": "Random Coffee: Person06 + Person31",
+    "start": "2026-08-13T11:00:00+01:00",
+    "end": "2026-08-13T11:15:00+01:00",
+    "attendees": [
+      "person06@example.com",
+      "person31@example.com"
+    ],
+    "description": "You\u2019ve been randomly paired for a 15-minute coffee chat this week.\n\nNo agenda or prep needed \u2014 just get to know each other.\n\nIf this time does not work, please use Google Calendar's \u2018Propose a new time\u2019 or message each other and move the coffee chat to a better slot.",
+    "google_meet_requested": true
+  },
+  {
+    "event_id": "mock_2026-08-10_6e52fd9c791b",
+    "summary": "Random Coffee: Person35 + Person43",
+    "start": "2026-08-13T14:00:00+01:00",
+    "end": "2026-08-13T14:15:00+01:00",
+    "attendees": [
+      "person35@example.com",
+      "person43@example.com"
+    ],
+    "description": "You\u2019ve been randomly paired for a 15-minute coffee chat this week.\n\nNo agenda or prep needed \u2014 just get to know each other.\n\nIf this time does not work, please use Google Calendar's \u2018Propose a new time\u2019 or message each other and move the coffee chat to a better slot.",
+    "google_meet_requested": true
+  },
+  {
+    "event_id": "mock_2026-08-10_b82f34fa8986",
+    "summary": "Random Coffee: Person16 + Person30",
+    "start": "2026-08-14T10:30:00+01:00",
+    "end": "2026-08-14T10:45:00+01:00",
+    "attendees": [
+      "person16@example.com",
+      "person30@example.com"
+    ],
+    "description": "You\u2019ve been randomly paired for a 15-minute coffee chat this week.\n\nNo agenda or prep needed \u2014 just get to know each other.\n\nIf this time does not work, please use Google Calendar's \u2018Propose a new time\u2019 or message each other and move the coffee chat to a better slot.",
+    "google_meet_requested": true
+  },
+  {
+    "event_id": "mock_2026-08-10_4e859d5f026f",
+    "summary": "Random Coffee: Person26 + Person38",
+    "start": "2026-08-14T14:30:00+01:00",
+    "end": "2026-08-14T14:45:00+01:00",
+    "attendees": [
+      "person26@example.com",
+      "person38@example.com"
+    ],
+    "description": "You\u2019ve been randomly paired for a 15-minute coffee chat this week.\n\nNo agenda or prep needed \u2014 just get to know each other.\n\nIf this time does not work, please use Google Calendar's \u2018Propose a new time\u2019 or message each other and move the coffee chat to a better slot.",
+    "google_meet_requested": true
+  },
+  {
+    "event_id": "mock_2026-08-10_195ed561c910",
+    "summary": "Random Coffee: Person17 + Person42",
+    "start": "2026-08-11T10:00:00+01:00",
+    "end": "2026-08-11T10:15:00+01:00",
+    "attendees": [
+      "person17@example.com",
+      "person42@example.com"
+    ],
+    "description": "You\u2019ve been randomly paired for a 15-minute coffee chat this week.\n\nNo agenda or prep needed \u2014 just get to know each other.\n\nIf this time does not work, please use Google Calendar's \u2018Propose a new time\u2019 or message each other and move the coffee chat to a better slot.",
+    "google_meet_requested": true
+  },
+  {
+    "event_id": "mock_2026-08-10_277ef535f088",
+    "summary": "Random Coffee: Person27 + Person45",
+    "start": "2026-08-11T14:30:00+01:00",
+    "end": "2026-08-11T14:45:00+01:00",
+    "attendees": [
+      "person27@example.com",
+      "person45@example.com"
+    ],
+    "description": "You\u2019ve been randomly paired for a 15-minute coffee chat this week.\n\nNo agenda or prep needed \u2014 just get to know each other.\n\nIf this time does not work, please use Google Calendar's \u2018Propose a new time\u2019 or message each other and move the coffee chat to a better slot.",
+    "google_meet_requested": true
+  },
+  {
+    "event_id": "mock_2026-08-10_876d348d5732",
+    "summary": "Random Coffee: Person07 + Person39",
+    "start": "2026-08-12T10:00:00+01:00",
+    "end": "2026-08-12T10:15:00+01:00",
+    "attendees": [
+      "person07@example.com",
+      "person39@example.com"
+    ],
+    "description": "You\u2019ve been randomly paired for a 15-minute coffee chat this week.\n\nNo agenda or prep needed \u2014 just get to know each other.\n\nIf this time does not work, please use Google Calendar's \u2018Propose a new time\u2019 or message each other and move the coffee chat to a better slot.",
+    "google_meet_requested": true
+  },
+  {
+    "event_id": "mock_2026-08-10_7767dacdb05c",
+    "summary": "Random Coffee: Person03 + Person41",
+    "start": "2026-08-12T15:00:00+01:00",
+    "end": "2026-08-12T15:15:00+01:00",
+    "attendees": [
+      "person03@example.com",
+      "person41@example.com"
+    ],
+    "description": "You\u2019ve been randomly paired for a 15-minute coffee chat this week.\n\nNo agenda or prep needed \u2014 just get to know each other.\n\nIf this time does not work, please use Google Calendar's \u2018Propose a new time\u2019 or message each other and move the coffee chat to a better slot.",
+    "google_meet_requested": true
+  },
+  {
+    "event_id": "mock_2026-08-10_e919418c440c",
+    "summary": "Random Coffee: Person12 + Person48",
+    "start": "2026-08-13T11:00:00+01:00",
+    "end": "2026-08-13T11:15:00+01:00",
+    "attendees": [
+      "person12@example.com",
+      "person48@example.com"
+    ],
+    "description": "You\u2019ve been randomly paired for a 15-minute coffee chat this week.\n\nNo agenda or prep needed \u2014 just get to know each other.\n\nIf this time does not work, please use Google Calendar's \u2018Propose a new time\u2019 or message each other and move the coffee chat to a better slot.",
+    "google_meet_requested": true
+  },
+  {
+    "event_id": "mock_2026-08-10_61e780081cd3",
+    "summary": "Random Coffee: Person24 + Person25",
+    "start": "2026-08-13T14:00:00+01:00",
+    "end": "2026-08-13T14:15:00+01:00",
+    "attendees": [
+      "person24@example.com",
+      "person25@example.com"
+    ],
+    "description": "You\u2019ve been randomly paired for a 15-minute coffee chat this week.\n\nNo agenda or prep needed \u2014 just get to know each other.\n\nIf this time does not work, please use Google Calendar's \u2018Propose a new time\u2019 or message each other and move the coffee chat to a better slot.",
+    "google_meet_requested": true
+  },
+  {
+    "event_id": "mock_2026-08-10_13a1187e4db5",
+    "summary": "Random Coffee: Person34 + Person49",
+    "start": "2026-08-14T10:30:00+01:00",
+    "end": "2026-08-14T10:45:00+01:00",
+    "attendees": [
+      "person34@example.com",
+      "person49@example.com"
+    ],
+    "description": "You\u2019ve been randomly paired for a 15-minute coffee chat this week.\n\nNo agenda or prep needed \u2014 just get to know each other.\n\nIf this time does not work, please use Google Calendar's \u2018Propose a new time\u2019 or message each other and move the coffee chat to a better slot.",
+    "google_meet_requested": true
+  },
+  {
+    "event_id": "mock_2026-08-10_5941c3a006a7",
+    "summary": "Random Coffee: Person04 + Person05",
+    "start": "2026-08-14T14:30:00+01:00",
+    "end": "2026-08-14T14:45:00+01:00",
+    "attendees": [
+      "person04@example.com",
+      "person05@example.com"
+    ],
+    "description": "You\u2019ve been randomly paired for a 15-minute coffee chat this week.\n\nNo agenda or prep needed \u2014 just get to know each other.\n\nIf this time does not work, please use Google Calendar's \u2018Propose a new time\u2019 or message each other and move the coffee chat to a better slot.",
+    "google_meet_requested": true
+  },
+  {
+    "event_id": "mock_2026-08-10_af7b008ef086",
+    "summary": "Random Coffee: Person11 + Person22",
+    "start": "2026-08-11T10:00:00+01:00",
+    "end": "2026-08-11T10:15:00+01:00",
+    "attendees": [
+      "person11@example.com",
+      "person22@example.com"
+    ],
+    "description": "You\u2019ve been randomly paired for a 15-minute coffee chat this week.\n\nNo agenda or prep needed \u2014 just get to know each other.\n\nIf this time does not work, please use Google Calendar's \u2018Propose a new time\u2019 or message each other and move the coffee chat to a better slot.",
+    "google_meet_requested": true
+  }
+]
